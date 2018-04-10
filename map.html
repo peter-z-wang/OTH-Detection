@@ -36,30 +36,37 @@
 
     <script>
       var map;
-      var lat_lng = {lat: 34, lng: 220};
+      var center_var = {lat: 34, lng: 220};
       var markers = [];
+      var label_index = 0;
+      var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-      function initMap() {  
+    function initMap() {  
 	  
-	  map = new google.maps.Map(document.getElementById('map'), {  
+	  map = new google.maps.Map(document.getElementById('map'), 
+	  {  
 	    zoom: 4,  
-	    center: lat_lng,  
-	    mapTypeId: google.maps.MapTypeId.TERRAIN  
+	    center: center_var,  
+	     
 	  });  
 	  
 	  // This event listener will call addMarker() when the map is clicked.  
-	  map.addListener('click', function(event) {  
-	    addMarker(event.latLng);  
+	  map.addListener('click', function(event) 
+	  {  
+	    addMarker(event.latLng, map);  
 	  });  
 	  
 	  // Adds a marker at the center of the map.  
-	  addMarker(lat_lng);  
+	  addMarker(center_var, map);  
 	}  
 	  
 	// Adds a marker to the map and push to the array.  
-	function addMarker(location) {  
-	  var marker = new google.maps.Marker({  
+	function addMarker(location,map) 
+	{  
+	  var marker = new google.maps.Marker(
+	  {  
 	    position: location,  
+	    label: labels[label_index++ % labels.length],
 	    map: map  
 	  });  
 	  markers.push(marker);  
