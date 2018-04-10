@@ -23,29 +23,46 @@
 			<div class = "row">
 				<h2 style = "White;"> Choose your UAV </h2>
 				
-					<form action = "" method = "post">
-						<p class = "text-center">
-							
-							<select name = "UAV">
-								<option value = "">Select...</option>
-								<option value = "Scan Eagle">Scan Eagle</option>
-								<option value = "Firescout">Firescout</option>
-							</select>
-						</p>
-						
-						<p class="text-center">
+					<select id="UAV">
+					  <option value="1">Scan Eagle</option>
+					  <option value="2">Firescout</option>
+					</select>
+					
+					<p>
+					<button onclick="show()">Show Image</button>
+					<hr>
 
-						<input type="submit" name="submit" value="Send" />
+					<div id="id1" class="class1">
+					  <img data-src="http://www.unmannedsystemstechnology.com/wp-content/uploads/2017/04/Insitu-ScanEagle-UAV.jpg" height = 200px alt="">
 
-						</p>
-						
+					  <img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTln8ypzSMvyJQyaeoNu09b8QSn3iPJDU3Tv69YdwLC9Jad2FIs" height = 200px alt="">
+					</div>
 
+					<hr>
+					</p>
+
+					</form>
 			</div>
 		</div>
 
-
+		
 	</body>
 
+	<script>
+		function show() {
+		  var x = document.getElementById('UAV');
+		  var y = x.options[x.selectedIndex].value;
+		  document.getElementById('id1').style.maxHeight = "200px";
+		  var images = document.querySelectorAll("#id1 img");
+		
+		  if(y == 1){
+		  	images[0].src = images[0].getAttribute('data-src');
+		  }
+		  else{
+		  	images[0].src = images[1].getAttribute('data-src');
+		  }		  
+		}	
+	</script>
 
 
 </html>
