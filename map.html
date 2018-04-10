@@ -8,12 +8,13 @@
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
+      /* Map Physical attributes */
       #map {
-        height: 70%;
-        width: 50%;
+        height: 80%;
+        width: 70%;
         padding-left: 10%;
         position: relative;
-        left: 20%;
+        left: 10%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -35,10 +36,18 @@
 
     <script>
       var map;
+      var point = {lat: 34, lng: 220};
+      
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 1
+          center: point,
+          zoom: 4
+        });
+
+        var marker = new google.maps.Marker({
+          position: point,
+          
+          map: map
         });
       }
     </script>
