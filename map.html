@@ -31,7 +31,7 @@
 		</center>
 
     <div id="map">
-    	
+	    	
     </div>
 
     <script>
@@ -39,9 +39,11 @@
       var center_var = {lat: 34, lng: 220};
       var markers = [];
       var label_index = 0;
+      var marker_index = 0;
       var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    function initMap() {  
+    function initMap() 
+    {  
 	  
 	  map = new google.maps.Map(document.getElementById('map'), 
 	  {  
@@ -53,11 +55,17 @@
 	  // This event listener will call addMarker() when the map is clicked.  
 	  map.addListener('click', function(event) 
 	  {  
-	    addMarker(event.latLng, map);  
+	    addMarker(event.latLng, map); 
+	    drawLine(markers,map,marker_index) 
+	    marker_index++
 	  });  
 	  
+
 	  // Adds a marker at the center of the map.  
 	  addMarker(center_var, map);  
+
+
+
 	}  
 	  
 	// Adds a marker to the map and push to the array.  
@@ -67,10 +75,31 @@
 	  {  
 	    position: location,  
 	    label: labels[label_index++ % labels.length],
+	  
 	    map: map  
 	  });  
-	  markers.push(marker);  
+	  markers.push(marker); 
 	}  
+
+	function drawLine(markers,map,i)
+	{
+		// Drawing Lines 
+	  var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+        };
+        
+	  var line = new google.maps.Polyline(
+	  {
+          path: [{lat: markers[i].position.lat(), lng: markers[i].position.lng()}, {lat: markers[i+1].position.lat(), lng: markers[i+1].position.lng()}],
+          icons: [{
+            icon: lineSymbol,
+            offset: '100%'
+          }],
+          map: map
+        });
+
+
+	}
 
 
     </script>
