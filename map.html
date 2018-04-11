@@ -37,6 +37,7 @@
     <script>
       var map;
       var center_var = {lat: 34, lng: 220};
+      var target_var = {lat: 34, lng: 190};
       var markers = [];
       var label_index = 0;
       var marker_index = 0;
@@ -51,7 +52,8 @@
 	    center: center_var,  
 	     
 	  });  
-	  
+	  addMarker(target_var, map);
+	  markers.pop();
 	  // This event listener will call addMarker() when the map is clicked.  
 	  map.addListener('click', function(event) 
 	  {  
@@ -62,7 +64,8 @@
 	  
 
 	  // Adds a marker at the center of the map.  
-	  addMarker(center_var, map);  
+	  addMarker(center_var, map); 
+
 
 
 
@@ -90,11 +93,14 @@
         
 	  var line = new google.maps.Polyline(
 	  {
-          path: [{lat: markers[i].position.lat(), lng: markers[i].position.lng()}, {lat: markers[i+1].position.lat(), lng: markers[i+1].position.lng()}],
+          path: [{lat: markers[i].position.lat(), lng: markers[i].position.lng()}, {lat: markers[i+1].position.lat(), 
+          	lng: markers[i+1].position.lng()}],
+          
           icons: [{
             icon: lineSymbol,
             offset: '100%'
           }],
+          
           map: map
         });
 
