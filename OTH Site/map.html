@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      /* Map Physical attributes */
+      #map {
+        height: 65%;
+        width: 75%;
+        padding-left: 10%;
+        position: absolute;
+        left: 22.5%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        width: `100%;
+        margin: 0;
+      }
+    </style>
+
+  <head>
+    <title>Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title> Dashboard </title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    
+    
+  </head>
+  <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">OTH Detection</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="tables.html">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Tables</span>
+          </a>
+        </li>
+        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">Other Pages</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+            <li>
+              <a href="login.html">Login Page</a>
+            </li>
+            <li>
+              <a href="register.html">Registration Page</a>
+            </li>
+            <li>
+              <a href="forgot-password.html">Forgot Password Page</a>
+            </li>
+            
+          </ul>
+        </li>
+        
+
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- MAIN PAGE -->
+
+    
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.html">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Map</li>
+      </ol>
+      <div id="map"></div>
+      
+
+        
+          
+        
+
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+
+
+    <script>
+      var map;
+      var center_var = {lat: 34, lng: 220};
+      var target_var = {lat: 34, lng: 190};
+      var markers = [];
+      var label_index = 0;
+      var marker_index = 0;
+      var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    function initMap() 
+    {  
+	  
+	  map = new google.maps.Map(document.getElementById('map'), 
+	  {  
+	    zoom: 4,  
+	    center: center_var,  
+	     
+	  });  
+	  addMarker(target_var, map);
+	  markers.pop();
+	  // This event listener will call addMarker() when the map is clicked.  
+	  map.addListener('click', function(event) 
+	  {  
+	    addMarker(event.latLng, map); 
+	    drawLine(markers,map,marker_index) 
+	    marker_index++
+	  });  
+	  
+
+	  // Adds a marker at the center of the map.  
+	  addMarker(center_var, map); 
+
+
+
+
+	}  
+	  
+	// Adds a marker to the map and push to the array.  
+	function addMarker(location,map) 
+	{  
+	  var marker = new google.maps.Marker(
+	  {  
+	    position: location,  
+	    label: labels[label_index++ % labels.length],
+	  
+	    map: map  
+	  });  
+	  markers.push(marker); 
+	}  
+
+	function drawLine(markers,map,i)
+	{
+		// Drawing Lines 
+	  var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+        };
+        
+	  var line = new google.maps.Polyline(
+	  {
+          path: [{lat: markers[i].position.lat(), lng: markers[i].position.lng()}, {lat: markers[i+1].position.lat(), 
+          	lng: markers[i+1].position.lng()}],
+          
+          icons: [{
+            icon: lineSymbol,
+            offset: '100%'
+          }],
+          
+          map: map
+        });
+
+
+	}
+
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNahXNp8gI972J1xcFH4rSUuHJPfHaBSs&callback=initMap"
+    async defer></script>
+  
+  </body>
+</html>
