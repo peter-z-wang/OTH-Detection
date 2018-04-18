@@ -2,79 +2,6 @@
 <html lang="en">
 
 <style>
-.container {
-  position: relative;
-  width: 50%;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: 200px;
-}
-
-.overlay {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  background-color: #008CBA;
-  overflow: hidden;
-  width: 100%;
-  height:0;
-  transition: .5s ease;
-}
-
-.container:hover .overlay {
-  bottom: 0;
-  height: 100%;
-}
-
-.text {
-  color: white;
-  font-size: 20px;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
-
-/* Create four equal columns that sits next to each other */
-.column {
-  flex: 25%;
-  max-width: 25%;
-  padding: 0 4px;
-}
-
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
-}
-
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-  .column {
-    flex: 50%;
-    max-width: 50%;
-  }
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    flex: 100%;
-    max-width: 100%;
-  }
-
-}
-}
 </style>
 
 <head>
@@ -83,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title> Dashboard </title>
+  <title> Configure </title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -112,7 +39,7 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="customize.html">
             <i class="fa fa-fw fa-gear"></i>
-            <span class="nav-link-text">Customize</span>
+            <span class="nav-link-text">Configure</span>
           </a>
         </li>
         
@@ -173,83 +100,38 @@
         <li class="breadcrumb-item">
           <a href="index.html">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Home</li>
+        <li class="breadcrumb-item active">Configure</li>
       </ol>
       
-
-
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-plane"></i> UAV Roster</div>
+          <i class="fa fa-plane"></i> Configure UAV</div>
         <div class="card-body">
           
-          <div class="row"> 
-            <div class="column">
-              <div class="container">
-                <a href=map.html>
-              <img src="http://www.unmannedsystemstechnology.com/wp-content/uploads/2017/04/Insitu-ScanEagle-UAV.jpg" height="200px" width="300px" class="image">
-              
-              <div class="overlay">
-                <div class="text">
-                  <p>Serial Number: UMB2K9PS</p>
-                  <p>Status: Ready to Launch</p>
-                  <p>Payload: Radar</p>
-                </div>
-             
-              </div>
-            </a>
-              </div>
-            </div>
+        <form action="results.php" method="post">  
+          <div class="form-group">
+			  <label for="sel1">UAV Platform:</label>
+			  <select class="form-control" id="sel1" name="UAV">
+			    <option>Scan Eagle</option>
+			    <option>Firescout</option>
+			    <option>Switchblade</option>
+			    <option>Aerosonde</option>
+			  </select>
+			</div>
 
-            <div class="column">
-              <div class="container">
-                <a href=map.html>
-              <img src="http://www.unmannedsystemstechnology.com/wp-content/uploads/2017/04/Insitu-ScanEagle-UAV.jpg" height="200px" width="300px" class="image">
-              
-              <div class="overlay">
-                <div class="text">
-                  <p>Serial Number: 4WPSBL7P</p>
-                  <p>Status: In Flight</p>
-                  <p>Payload: EO/IR Camera</p>
-                </div>
-              </div>
+			<div class="form-group">
+			  <label for="sel2">Sensor Suite:</label>
+			  <select class="form-control" id="sel2">
+			    <option>Radar</option>
+			    <option>Lidar</option>
+			    <option>EO/IR Camera</option>
+			  </select>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+ 
             
-            </a>
-            </div>
-            </div>
 
-            <div class="column">
-              <div class="container">
-                <a href=map.html>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTln8ypzSMvyJQyaeoNu09b8QSn3iPJDU3Tv69YdwLC9Jad2FIs" height = "200px" width="300px" alt="" class="image">
-              
-              <div class="overlay">
-                <div class="text">
-                  <p>Serial Number: SKLXVZKR</p>
-                  <p>Status: Undergoing Repairs</p>
-                  <p>Payload: Radar</p>
-                </div>
-              </div>
-
-            </a>
-            </div>
-            </div>
-
-            <div class="column">
-              <div class="container">
-                <a href=map.html>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTln8ypzSMvyJQyaeoNu09b8QSn3iPJDU3Tv69YdwLC9Jad2FIs" height = "200px" width="300px" alt="" class="image">
-            
-                <div class="overlay">
-                  <div class="text">
-                    <p>Serial Number: 9BD8BN4X</p>
-                    <p>Status: Ready to Launch</p>
-                    <p>Payload: EO/IR Camera</p>
-                  </div>
-                </div>
-
-                </a>
-            </div>
             </div>
           </div>
 
@@ -258,7 +140,7 @@
       </div>
 
 
-    </div>
+    
 
     
     <!-- /.container-fluid-->
