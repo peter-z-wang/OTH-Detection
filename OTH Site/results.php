@@ -109,8 +109,8 @@
         <div class="card-body">
           
 
-          Welcome <?php echo $_POST["UAV"]; ?><br>
-			Your email address is: <?php echo $_POST["sel2"]; ?>
+          Welcome <?php echo "OFIJE:OFJIO"; ?>
+		
 
             
 
