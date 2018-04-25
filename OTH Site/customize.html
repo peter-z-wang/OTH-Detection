@@ -7,7 +7,7 @@
 }
 .slider {
     -webkit-appearance: none;
-    width: 100%;
+    width: 83.5%;
     height: 15px;
     border-radius: 5px;   
     background: #d3d3d3;
@@ -33,6 +33,11 @@
     border-radius: 50%;
     background: #007bff;
     cursor: pointer;
+}
+input[type=text] {
+    text-align: center;
+    border: 1px solid #555;
+    border-radius: 4px;
 }
 </style>
 
@@ -166,8 +171,12 @@
 
       <div class="slidecontainer">
         <label for="sel3">Communication Frequency:</label>
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        <p>Continous <input type="range" min="0" max="20" value="10" class="slider" id="myRange" onchange="updateTextInput(this.value,this.max);"> Never</p>
+        <input type="text" id="slider_val" value="10" size="7"> Minutes
+
       </div>
+
+      <br>
 
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
@@ -181,7 +190,23 @@
           <i class="fa fa-plane"></i> UAV Capabilities</div>
         <div class="card-body">
 
-
+          <div>
+            <label for="sel4">Maximum Flight Time: </label>
+            <br>
+             <input type="text" id="slider_val" value="20" size="1"> Hours
+         </div>
+         <br>
+         <div>
+            <label for="sel4">Maximum Range: </label>
+            <br>
+             <input type="text" id="slider_val" value="62" size="1"> Nautical Miles
+         </div>
+         <br>
+         <div>
+            <label for="sel5">EMCON Level: </label>
+            <br>
+             <input type="text" id="slider_val" value="A" size="1"> 
+         </div>
 
         </div>
       </div>
@@ -238,14 +263,22 @@
   </div>
 </body>
 <script>
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value; // Display the default slider value
 
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-    output.innerHTML = this.value;
-}
+
+function updateTextInput(val,max) {
+
+          if(val < 1){
+          document.getElementById('slider_val').value="Continous"; 
+        }
+          else if(val == max){
+            document.getElementById('slider_val').value="Never";   
+          }
+          else{
+            document.getElementById('slider_val').value=val;
+          }
+        }
+
+
 </script>
 
 </html>
