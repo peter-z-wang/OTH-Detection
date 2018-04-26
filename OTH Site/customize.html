@@ -193,25 +193,30 @@ input[type=text] {
           <div>
             <label for="sel4">Maximum Flight Time: </label>
             <br>
-             <input type="text" id="time_val" value="20" size="1"> Hours
+             <input type="text" id="time_val" value="15" size="1"> Hours
          </div>
          <br>
          <div>
             <label for="sel4">Maximum Range: </label>
             <br>
-             <input type="text" id="range_val" value="62" size="1"> Nautical Miles
+             <input type="text" id="range_val" value="42" size="1"> Nautical Miles
          </div>
          <br>
          <div>
-            <label for="sel5">EMCON Level: </label>
+            <label for="sel5">Maximum Speed: </label>
+            <br>
+             <input type="text" id="speed_val" value="65" size="1"> Knots
+         </div>
+         <br>
+         <div>
+            <label for="sel6">EMCON Level: </label>
             <br>
              <input type="text" id="emcon_val" value="B" size="1"> 
          </div>
 
          <br>
-         <br>
-         <br>
-         <br>
+      
+         
 
         </div>
       </div>
@@ -291,20 +296,25 @@ var x = 20;
 var y = 5;
 //Range
 var z = 62;
+//Speed
+var a = 80;
 
 
 function updateUAV(val){
   if(val == "Scan Eagle"){
     x = 20;
     z = 62;
+    a = 80;
   }
   else if(val == "Firescout"){
     x = 190;
     z = 125;
+    a = 135;
   }
   else{
     x = 30;
     z = 100;
+    a = 90;
   }
 }
 
@@ -323,6 +333,7 @@ function updatePayload(val){
 function updateSpec(){
   document.getElementById('time_val').value = x-y;
   document.getElementById('range_val').value = z-(y*4);
+  document.getElementById('speed_val').value = a-(y*3);
 }
 
 </script>
