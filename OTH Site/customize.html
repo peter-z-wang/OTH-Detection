@@ -152,7 +152,7 @@ input[type=text] {
         <form action="map.html">  
           <div class="form-group">
 			  <label for="sel1">UAV Platform:</label>
-			  <select class="form-control" id="sel1" name="UAV">
+			  <select class="form-control" id="sel1" name="UAV" onchange="updateUAV(this.value);updateSpec();">
 			    <option>Scan Eagle</option>
 			    <option>Firescout</option>
 			    <option>Switchblade</option>
@@ -162,7 +162,7 @@ input[type=text] {
 
 			<div class="form-group">
 			  <label for="sel2">Sensor Suite:</label>
-			  <select class="form-control" id="sel2">
+			  <select class="form-control" id="sel2" onchange="updatePayload(this.value);updateSpec();">
 			    <option>Radar</option>
 			    <option>Lidar</option>
 			    <option>EO/IR Camera</option>
@@ -193,20 +193,25 @@ input[type=text] {
           <div>
             <label for="sel4">Maximum Flight Time: </label>
             <br>
-             <input type="text" id="slider_val" value="20" size="1"> Hours
+             <input type="text" id="time_val" value="20" size="1"> Hours
          </div>
          <br>
          <div>
             <label for="sel4">Maximum Range: </label>
             <br>
-             <input type="text" id="slider_val" value="62" size="1"> Nautical Miles
+             <input type="text" id="range_val" value="62" size="1"> Nautical Miles
          </div>
          <br>
          <div>
             <label for="sel5">EMCON Level: </label>
             <br>
-             <input type="text" id="slider_val" value="A" size="1"> 
+             <input type="text" id="emcon_val" value="B" size="1"> 
          </div>
+
+         <br>
+         <br>
+         <br>
+         <br>
 
         </div>
       </div>
@@ -268,16 +273,57 @@ input[type=text] {
 function updateTextInput(val,max) {
 
           if(val < 1){
-          document.getElementById('slider_val').value="Continous"; 
+            document.getElementById('slider_val').value="Continous"; 
+            document.getElementById('emcon_val').value="A";
         }
           else if(val == max){
             document.getElementById('slider_val').value="Never";   
+            document.getElementById('emcon_val').value="C";
           }
           else{
             document.getElementById('slider_val').value=val;
+            document.getElementById('emcon_val').value="B";
           }
         }
+//Time
+var x = 20;
+//Payloads
+var y = 5;
+//Range
+var z = 62;
 
+
+function updateUAV(val){
+  if(val == "Scan Eagle"){
+    x = 20;
+    z = 62;
+  }
+  else if(val == "Firescout"){
+    x = 190;
+    z = 125;
+  }
+  else{
+    x = 30;
+    z = 100;
+  }
+}
+
+function updatePayload(val){
+  if(val == "Radar"){
+    y = 5;
+  }
+  else if(val == "Lidar"){
+    y = 3;
+  }
+  else if(val == "EO/IR Camera"){
+    y = 2;
+  }
+}
+
+function updateSpec(){
+  document.getElementById('time_val').value = x-y;
+  document.getElementById('range_val').value = z-(y*4);
+}
 
 </script>
 
