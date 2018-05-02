@@ -146,19 +146,10 @@ input[type=text] {
       <div class="col-lg-6">
         <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-gear"></i> Configure UAV</div>
+          <i class="fa fa-gear"></i> Configure UAV: Firescout</div>
         <div class="card-body">
           
-        <form action="map.html">  
-          <div class="form-group">
-			  <label for="sel1">UAV Platform:</label>
-			  <select class="form-control" id="sel1" name="UAV" onchange="updateUAV(this.value);updateSpec();">
-			    <option>Scan Eagle</option>
-			    <option>Firescout</option>
-			    <option>Switchblade</option>
-			    <option>Aerosonde</option>
-			  </select>
-			</div>
+        
 
 			<div class="form-group">
 			  <label for="sel2">Sensor Suite:</label>
@@ -170,12 +161,17 @@ input[type=text] {
 			</div>
 
       <div class="slidecontainer">
+        <label for="sel3">Fuel Load:</label>
+        <br>
+        <input type="text" id="fuel_val" value="50" size="7"> Percent
+        <p>0 <input type="range" min="0" max="100" value="50" class="slider" id="myFuel" onchange="updateFuel(this.value);updateSpec();"> 100</p>
+      </div>
+
+      <div class="slidecontainer">
         <label for="sel3">Communications Burst Every:</label>
         <br>
         <input type="text" id="slider_val" value="10" size="7"> Minutes
-        <p>Continous <input type="range" min="0" max="20" value="10" class="slider" id="myRange" onchange="updateTextInput(this.value,this.max);"> Never</p>
-        
-
+        <p>Continuous <input type="range" min="0" max="20" value="10" class="slider" id="myRange" onchange="updateTextInput(this.value,this.max);"> Never</p>
       </div>
 
       <br>
@@ -195,19 +191,19 @@ input[type=text] {
           <div>
             <label for="sel4">Maximum Flight Time: </label>
             <br>
-             <input type="text" id="time_val" value="15" size="3"> Hours
+             <input type="text" id="time_val" value="90" size="3"> Hours
          </div>
          <br>
          <div>
             <label for="sel4">Maximum Range: </label>
             <br>
-             <input type="text" id="range_val" value="42" size="3"> Nautical Miles
+             <input type="text" id="range_val" value="42.5" size="3"> Nautical Miles
          </div>
          <br>
          <div>
             <label for="sel5">Maximum Speed: </label>
             <br>
-             <input type="text" id="speed_val" value="65" size="3"> Knots
+             <input type="text" id="speed_val" value="105" size="3"> Knots
          </div>
          <br>
          <div>
@@ -282,6 +278,7 @@ function updateTextInput(val,max) {
           if(val < 1){
             document.getElementById('slider_val').value="Continous"; 
             document.getElementById('emcon_val').value="C";
+
         }
           else if(val == max){
             document.getElementById('slider_val').value="Never";   
@@ -293,13 +290,20 @@ function updateTextInput(val,max) {
           }
         }
 //Time
-var x = 20;
+var x = 185;
 //Payloads
 var y = 5;
 //Range
-var z = 62;
+var z = 105;
 //Speed
-var a = 80;
+var a = 120;
+//Fuel
+var fuel = 100;
+
+function updateFuel(val){
+  document.getElementById('fuel_val').value = val;
+  fuel = val;
+}
 
 
 function updateUAV(val){
@@ -333,8 +337,8 @@ function updatePayload(val){
 }
 
 function updateSpec(){
-  document.getElementById('time_val').value = x-y;
-  document.getElementById('range_val').value = z-(y*4);
+  document.getElementById('time_val').value = (x-y)*(fuel/100);
+  document.getElementById('range_val').value = (z-(y*4))*(fuel/100);
   document.getElementById('speed_val').value = a-(y*3);
 }
 

@@ -170,7 +170,7 @@
 
     <script>
       var map;
-      var center_var = {lat: 34, lng: 220};
+      var center_var = {lat: 24.515911, lng: -78.876472};
       var target_var = {lat: 34, lng: 190};
       var markers = [];
       var label_index = 0;
@@ -182,7 +182,7 @@
 	  
 	  map = new google.maps.Map(document.getElementById('map'), 
 	  {  
-	    zoom: 4,  
+	    zoom: 10,  
 	    center: center_var,  
 	     
 	  });  
@@ -208,10 +208,18 @@
 	// Adds a marker to the map and push to the array.  
 	function addMarker(location,map) 
 	{  
+    var image = {
+      path: google.maps.SymbolPath.CIRCLE,
+      scale: 5,
+      strokeColor: 'yellow',  
+      strokeWeight: 3
+}; 
+
 	  var marker = new google.maps.Marker(
 	  {  
 	    position: location,  
-	    label: labels[label_index++ % labels.length],
+	    //label: labels[label_index++ % labels.length],
+      icon: image,
 	  
 	    map: map  
 	  });  
@@ -222,7 +230,8 @@
 	{
 		// Drawing Lines 
 	  var lineSymbol = {
-          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+          path: google.maps.SymbolPath.LINE,
+          strokeWeight: 2
         };
         
 	  var line = new google.maps.Polyline(
