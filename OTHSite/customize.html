@@ -171,7 +171,7 @@ input[type=text] {
         <label for="sel3">Communications Burst Every:</label>
         <br>
         <input type="text" id="slider_val" value="10" size="7"> Minutes
-        <p>Continuous <input type="range" min="0" max="20" value="10" class="slider" id="myRange" onchange="updateTextInput(this.value,this.max);"> Never</p>
+        <p>0 <input type="range" min="0" max="20" value="10" class="slider" id="myRange" onchange="updateTextInput(this.value,this.max);"> Never</p>
       </div>
 
       <br>
@@ -298,7 +298,7 @@ var z = 105;
 //Speed
 var a = 120;
 //Fuel
-var fuel = 100;
+var fuel = 50;
 
 function updateFuel(val){
   document.getElementById('fuel_val').value = val;
