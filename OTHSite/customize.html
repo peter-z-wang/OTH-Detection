@@ -167,12 +167,36 @@ input[type=text] {
         <p>0 <input type="range" min="0" max="100" value="50" class="slider" id="myFuel" onchange="updateFuel(this.value);updateSpec();"> 100</p>
       </div>
 
+
       <div class="slidecontainer">
         <label for="sel3">Communications Burst Every:</label>
         <br>
         <input type="text" id="slider_val" value="10" size="7"> Minutes
         <p>0 <input type="range" min="0" max="20" value="10" class="slider" id="myRange" onchange="updateTextInput(this.value,this.max);"> Never</p>
       </div>
+
+      <div class="slidecontainer">
+        <label for="sel3">Cruising Altitude:</label>
+        <br>
+        <input type="text" id="cruise_val" value="10000" size="7"> Feet
+        <p>0 <input type="range" min="0" max="20000" value="10000" class="slider" id="myCruiseAlt" onchange="updateCruise(this.value);"> 20,000</p>
+      </div>
+
+      <div class="slidecontainer">
+        <label for="sel3">Scanning Altitude:</label>
+        <br>
+        <input type="text" id="scan_val" value="10000" size="7"> Feet
+        <p>0 <input type="range" min="0" max="20000" value="10000" class="slider" id="myScanAlt" onchange="updateScan(this.value);"> 20,000</p>
+      </div>
+
+      <div class="slidecontainer">
+        <label for="sel3">Conduct Scan Every:</label>
+        <br>
+        <input type="text" id="scan_time" value="90" size="7"> Minutes
+        <p>0 <input type="range" min="0" max="180" value="90" class="slider" id="myScanTime" onchange="updateScanTime(this.value,this.max);"> 180</p>
+      </div>
+
+
 
       <br>
 
@@ -333,6 +357,25 @@ function updatePayload(val){
   }
   else if(val == "EO/IR Camera"){
     y = 2;
+  }
+}
+
+function updateCruise(val){
+  document.getElementById('cruise_val').value = val;
+}
+
+
+function updateScan(val){
+  document.getElementById('scan_val').value = val;
+}
+
+function updateScanTime(val){
+  if(val < 1){
+    document.getElementById('scan_time').value = 'Continous'
+  }
+  
+  else{
+    document.getElementById('scan_time').value = val;
   }
 }
 
